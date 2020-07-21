@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>TestVulas</groupId>
+	<artifactId>TestVulas</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>TestVulas</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.14</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-ext -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-ext</artifactId>
+			<version>1.5.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jodd/jodd-json -->
+		<dependency>
+			<groupId>org.jodd</groupId>
+			<artifactId>jodd-json</artifactId>
+			<version>3.7</version>
+		</dependency>
+
+	</dependencies>
+	<profiles>
+		<profile>
+			<id>vulas</id>
+			<activation>
+				<property>
+					<name>vulas</name>
+				</property>
+			</activation>
+			<properties>
+				<vulas.version>3.1.13-SNAPSHOT</vulas.version>
+				<vulas.shared.backend.serviceUrl>https://1.test.vulas.c.eu-de-2.cloud.sap/backend/</vulas.shared.backend.serviceUrl>
+				<vulas.core.space.token>9ACF6C7203AE8E812340035F30AD3FE8</vulas.core.space.token>
+				<vulas.core.appContext.group>${project.groupId}</vulas.core.appContext.group>
+				<vulas.core.appContext.artifact>${project.artifactId}</vulas.core.appContext.artifact>
+				<vulas.core.appContext.version>${project.version}</vulas.core.appContext.version>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.sap.research.security.vulas</groupId>
+						<artifactId>plugin-maven</artifactId>
+						<version>${vulas.version}</version>
+						<configuration>
+							<layeredConfiguration>
+								<vulas.shared.backend.serviceUrl>${vulas.shared.backend.serviceUrl}</vulas.shared.backend.serviceUrl>
+								<vulas.core.space.token>${vulas.core.space.token}</vulas.core.space.token>
+
+								<vulas.core.appContext.group>${vulas.core.appContext.group}</vulas.core.appContext.group>
+								<vulas.core.appContext.artifact>${vulas.core.appContext.artifact}</vulas.core.appContext.artifact>
+								<vulas.core.appContext.version>${vulas.core.appContext.version}</vulas.core.appContext.version>
+
+								<vulas.shared.tmpDir>${project.build.directory}/vulas/tmp</vulas.shared.tmpDir>
+								<vulas.core.uploadDir>${project.build.directory}/vulas/upload</vulas.core.uploadDir>
+								<vulas.core.app.sourceDir>${project.build.directory}/classes,${project.basedir}/src/main/java,${project.basedir}/src/main/python</vulas.core.app.sourceDir>
+
+								<!-- vulas:instr : Instruments JAR/WAR files found in source dir, 
+									and writes to target dir. Files in include dir are put into /WEB-INF/lib 
+									of output WARs. Files in lib dir are part of the class path when instrumenting. -->
+								<vulas.core.instr.sourceDir>${project.build.directory}</vulas.core.instr.sourceDir>
+								<vulas.core.instr.targetDir>${project.build.directory}/vulas/target</vulas.core.instr.targetDir>
+								<vulas.core.instr.includeDir>${project.build.directory}/vulas/include</vulas.core.instr.includeDir>
+								<vulas.core.instr.libDir>${project.build.directory}/vulas/lib</vulas.core.instr.libDir>
+								<vulas.core.instr.writeCode>false</vulas.core.instr.writeCode>
+								<vulas.core.instr.instrumentorsChoosen>com.sap.psr.vulas.monitor.trace.SingleTraceInstrumentor</vulas.core.instr.instrumentorsChoosen>
+								<vulas.core.instr.searchRecursive>false</vulas.core.instr.searchRecursive>
+								<vulas.core.monitor.periodicUpload.enabled>false</vulas.core.monitor.periodicUpload.enabled>
+								<vulas.core.instr.maxStacktraces>10</vulas.core.instr.maxStacktraces>
+
+								<!-- vulas:a2c/t2c : Performs static call graph analysis -->
+								<vulas.reach.wala.callgraph.reflection>NO_FLOW_TO_CASTS_NO_METHOD_INVOKE</vulas.reach.wala.callgraph.reflection>
+								<vulas.reach.timeout>60</vulas.reach.timeout>
+
+								<!-- vulas:report -->
+								<vulas.report.exceptionExcludeBugs></vulas.report.exceptionExcludeBugs>
+								<vulas.report.reportDir>${project.build.directory}/vulas/report</vulas.report.reportDir>
+							</layeredConfiguration>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
