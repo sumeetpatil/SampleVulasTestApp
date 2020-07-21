@@ -66,7 +66,7 @@
 				</property>
 			</activation>
 			<properties>
-				<vulas.version>3.1.13-SNAPSHOT</vulas.version>
+				<vulas.version>3.1.13</vulas.version>
 				<vulas.shared.backend.serviceUrl>https://1.test.vulas.c.eu-de-2.cloud.sap/backend/</vulas.shared.backend.serviceUrl>
 				<vulas.core.space.token>9ACF6C7203AE8E812340035F30AD3FE8</vulas.core.space.token>
 				<vulas.core.appContext.group>${project.groupId}</vulas.core.appContext.group>
