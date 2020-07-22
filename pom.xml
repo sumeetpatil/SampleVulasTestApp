@@ -68,7 +68,7 @@
 			<properties>
 				<vulas.version>3.1.13</vulas.version>
 				<vulas.shared.backend.serviceUrl>https://1.test.vulas.c.eu-de-2.cloud.sap/backend/</vulas.shared.backend.serviceUrl>
-				<vulas.core.space.token>9ACF6C7203AE8E812340035F30AD3FE8</vulas.core.space.token>
+				<vulas.core.space.token>F3FEA4CE91BDC8AE29C7C0636663CA9B</vulas.core.space.token>
 				<vulas.core.appContext.group>${project.groupId}</vulas.core.appContext.group>
 				<vulas.core.appContext.artifact>${project.artifactId}</vulas.core.appContext.artifact>
 				<vulas.core.appContext.version>${project.version}</vulas.core.appContext.version>
